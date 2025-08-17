@@ -1,0 +1,25 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from time import sleep
+
+driver = webdriver.Chrome()
+driver.get("https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal")
+sleep(1)
+driver.maximize_window()
+sleep(1)
+buscador=driver.find_element(By.ID, "searchInput")
+buscador.send_keys('teste')
+sleep(1)
+search=driver.find_element(By.XPATH, "//button[@class='cdx-button cdx-button--action-default cdx-button--weight-normal cdx-button--size-medium cdx-button--framed cdx-search-input__end-button']")
+search.click()
+sleep(5)
+texto= driver.find_element(By.CLASS_NAME, "hatnote")
+print(texto.text)
+driver.execute_script("window.scrollTo(0, 500);")
+link = driver.find_element(By.XPATH, "//a[@href='/wiki/Teste_projetivo']")
+link.click()
+sleep(1)
+driver.execute_script("window.scrollTo(0, 750);")
+imagens= driver.find_elements(By.TAG_NAME, "img")
+print(len(imagens))
+driver.quit()
